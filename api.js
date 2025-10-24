@@ -25,6 +25,43 @@ router.route('/cars').get((request, response) => {
     });
 })
 
+router.route('/cars').patch((request, response) => {
+  let car = {...request.body};
+  dboperations.updateCar(car).then(car => {
+    response.json(car[0]);
+  }).catch(error => {
+    response.status(500).send(error);
+  });
+})
+
+router.route('/cars').delete((request, response) => {
+  let id = request.params.id;
+  dboperations.deleteCar(id).then(car => {
+    response.json(car[0]);
+  }).catch(error => {
+    response.status(500).send(error);
+  });
+})
+
+router.route('/cars').post((request, response) => {
+  let car = {...request.body};
+  dboperations.addCar(car).then(car => {
+    response.json(car[0]);
+  }).catch(error => {
+    response.status(500).send(error);
+  });
+})
+
+router.route('/cars/:id').get((request, response) => {
+  let id = request.params.id;
+  dboperations.getCar(id).then(car => {
+    response.json(car[0]);
+  }).catch(error => {
+    response.status(500).send(error);
+  });
+})
+
+
 var port = process.env.PORT || 8090;
 app.listen(port);
 console.log('API is running on port ' + port);
