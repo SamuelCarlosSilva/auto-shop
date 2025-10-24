@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use('/api', router);
 
-router.use(request, response, next => {
+router.use((request, response, next) => {
     console.log('middleware');
     next();
 });
