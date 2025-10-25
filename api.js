@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 var Car = require('./car');
 const dboperations = require('./dboperations');
 
@@ -65,3 +67,4 @@ router.route('/cars/:id').get((request, response) => {
 var port = process.env.PORT || 8090;
 app.listen(port);
 console.log('API is running on port ' + port);
+
