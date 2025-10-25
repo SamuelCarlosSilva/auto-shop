@@ -19,25 +19,25 @@ router.use((request, response, next) => {
 
 router.route('/cars').get((request, response) => {
     dboperations.getCars().then(cars => {
-        response.json(cars[0]);
+        response.json(cars);
     }).catch(error => {
         response.status(500).send(error);
     });
 })
 
-router.route('/cars').patch((request, response) => {
+router.route('/cars/:id').patch((request, response) => {
   let car = {...request.body};
   dboperations.updateCar(car).then(car => {
-    response.json(car[0]);
+    response.json(car);
   }).catch(error => {
     response.status(500).send(error);
   });
 })
 
-router.route('/cars').delete((request, response) => {
+router.route('/cars/:id').delete((request, response) => {
   let id = request.params.id;
   dboperations.deleteCar(id).then(car => {
-    response.json(car[0]);
+    response.json(car);
   }).catch(error => {
     response.status(500).send(error);
   });
@@ -46,7 +46,7 @@ router.route('/cars').delete((request, response) => {
 router.route('/cars').post((request, response) => {
   let car = {...request.body};
   dboperations.addCar(car).then(car => {
-    response.json(car[0]);
+    response.json(car);
   }).catch(error => {
     response.status(500).send(error);
   });

@@ -17,22 +17,26 @@ async function updateCar(car) {
     try {
         let pool = await sql.connect(config);
         let shop = await pool.request()
-            .input('input_parameter', sql.Int, car.id)
+            .input('id', sql.Int, car.id)
+            .input('brand', sql.NVarChar, car.brand)
+            .input('model', sql.NVarChar, car.model)
+            .input('year', sql.Int, car.year)
+            .input('city', sql.NVarChar, car.city)
+            .input('image', sql.NVarChar, car.image)
             .query(`UPDATE [dbo].[Cars] 
             SET
-           [Brand] = ${car.brand},
-           [Model] = ${car.model},
-           [Year] = ${car.year},
-           [City] = ${car.city},
-           [Image] = ${car.image}
-           WHERE ID = @input_parameter
+           [Brand] = @brand,
+           [Model] = @model,
+           [Year] = @year,
+           [City] = @city,
+           [Image] = @image
+           WHERE ID = @id
         `);
         return shop.recordset;
     } catch (error) {
         console.log(error);
         return [];
     }
-
 }
 
 async function getCar(id) {
@@ -65,16 +69,21 @@ async function addCar(car) {
     try {
         let pool = await sql.connect(config);
         let shop = await pool.request()
-            .input('input_parameter', sql.Int, id)
+            .input('id', sql.Int, car.id)
+            .input('Brand', sql.NVarChar, car.brand)
+            .input('Model', sql.NVarChar, car.model)
+            .input('Year', sql.Int, car.year)
+            .input('City', sql.NVarChar, car.city)
+            .input('Image', sql.NVarChar, car.image)
             .query(`INSERT INTO [dbo].[Cars] 
             (id, Brand, Model, Year, City, Image)
             VALUES (
-            ${car.id},
-            ${car.brand},
-            ${car.model},
-            ${car.year}, 
-            ${car.city},
-            ${car.image})
+            @id,
+            @Brand,
+            @Model,
+            @Year, 
+            @City,
+            @Image)
         `)
         return shop.recordset;
     } catch (error) {
