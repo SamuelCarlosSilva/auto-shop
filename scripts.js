@@ -31,6 +31,7 @@ async function getCars() {
             <button class="add-cart">
                 <a href="details.html?id=${id}"><img src="https://cdn.onlinewebfonts.com/svg/img_216744.png" alt="Não carregou" class="cart-icon">
                 </a>
+            </button>
             </div>
         `;
     }
